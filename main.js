@@ -1,3 +1,4 @@
+//initializing everything
 let final_transcript = "";
 let recognizing = false;
 
@@ -7,8 +8,10 @@ const recognition = new speechRecognition();
 recognition.continuous = true;
 recognition.interimResults = true;
 recognition.maxAlternatives = 3;
+//at start the basic language is english
 recognition.lang = "en-US";
 
+//recognition methods
 recognition.onstart = () => {
   console.log("recognition started");
 };
@@ -22,7 +25,10 @@ recognition.onend = () => {
 };
 recognition.onresult = (e) => {
   let interim_transcript = "";
+  //we start from the place we stopped previous time
   for (let i = e.resultIndex; i < e.results.length; i++) {
+    //if speech stopped, we are converting interim results to
+    //the final results, otherwise we continue the transcription
     if (e.results[i].isFinal) {
       const result = editInterim(e.results[i][0].transcript);
       final_transcript += result;
@@ -31,6 +37,7 @@ recognition.onresult = (e) => {
     }
   }
   final_transcript = editFinal(final_transcript);
+  //write all the transcript in the textarea
   final_text.value = final_transcript + interim_transcript;
 };
 
@@ -58,6 +65,8 @@ const DICTIONARY_US = {
   indent: "\t"
 };
 
+//interim is the part which can be changed drastically in the
+//process of recognition
 function editInterim(s) {
   return s
     .split(" ")
@@ -71,10 +80,13 @@ function editInterim(s) {
     .join(" ");
 }
 
+//final is a core of the message, it won't be changed later
 function editFinal(s) {
   return s.replace(/\s([\.+,?!:-])/g, "$1");
 }
 
+//basic functionality, such as start/end of the recognition
+//process, copy, clear and changing language
 buttons.onclick = ({ target }) => {
   switch (target.className) {
     case "start":
@@ -93,6 +105,7 @@ buttons.onclick = ({ target }) => {
     case "clear":
       final_text.value = "";
       break;
+    //if it's english we change language to russian and vice versa
     case "language":
       if (recognition.lang == "en-US") {
         recognition.lang = "ru-RU";
