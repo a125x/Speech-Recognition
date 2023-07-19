@@ -1,5 +1,5 @@
 # Speech-Recognition
-Basic speech recognition tool powered by web speech api. Works in Chrome.
+Basic speech recognition tool powered by web speech api. Works in ONLY in Chrome because of Google Speech API.
 
 To use it just open the linked site and press the 'start' button. It just works.
 
