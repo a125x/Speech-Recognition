@@ -30,8 +30,6 @@ main.js: base js file
 I used web speech api (https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) to recognise speech. 
 Also I builded an app in electron, but as I said previously it doesn't really matter. 
 
-## Problem with google api
+## Problem with google speech api
 
-In Chrome google speech api works natively, however electron uses chromium in which this api don't work initially.
-To make it work, I'd have to set enviroment variables on my device. Unfortunately I can't do it because it's not
-for free and even if i'd like to pay, google doesn't accept Russian cards.
+In Google Chrome google speech api works natively, however electron uses chromium in which this api don't work for free. So Chrome is necessary to use this website.
